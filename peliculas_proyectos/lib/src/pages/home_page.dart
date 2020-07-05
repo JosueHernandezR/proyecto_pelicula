@@ -59,10 +59,10 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left:20.0),
+              padding: EdgeInsets.only(left: 20.0),
               child: Text(
                 'Populares',
-                style: Theme.of(context).textTheme.subhead,
+                style: Theme.of(context).textTheme.subtitle1,
               ),
             ),
             SizedBox(
@@ -70,7 +70,6 @@ class HomePage extends StatelessWidget {
             ),
             StreamBuilder(
                 stream: peliculasProvider.popularesStream,
-                
                 builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
                   //print(snapshot.data);
                   // snapshot.data?.forEach((p) => print(p.title));
@@ -79,7 +78,6 @@ class HomePage extends StatelessWidget {
                       peliculas: snapshot.data,
                       siguientePagina: peliculasProvider.getPopulares,
                     );
-
                   } else {
                     return Center(child: CircularProgressIndicator());
                   }

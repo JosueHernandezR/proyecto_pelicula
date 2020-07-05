@@ -43,7 +43,8 @@ class MovieHorizontal extends StatelessWidget {
 
   //Crear una sola tarjeta
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
-    return Container(
+    //Se hace el cambio por que ya es dificil de leer por la identación
+    final tarjeta = Container(
       margin: EdgeInsets.only(right: 15.0),
       child: Column(
         children: <Widget>[
@@ -51,7 +52,7 @@ class MovieHorizontal extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
             child: FadeInImage(
               image: NetworkImage(pelicula.getPosterImg()),
-              placeholder: AssetImage('assets/img/no.image.jpg'),
+              placeholder: AssetImage('assets/img/no-image.jpg'),
               fit: BoxFit.cover,
               height: 160.0,
             ),
@@ -66,6 +67,16 @@ class MovieHorizontal extends StatelessWidget {
           ),
         ],
       ),
+    );
+
+    //Detectar cuando se hace clic
+    return GestureDetector(
+      child: tarjeta,
+      onTap: () {
+        //Muestra la información de la tarjeta
+        //Con arguments se puede mandar datos a la siguiente página
+        Navigator.pushNamed(context, 'detalle', arguments: pelicula);
+      },
     );
   }
 
