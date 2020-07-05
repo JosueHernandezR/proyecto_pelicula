@@ -25,6 +25,7 @@ class MovieHorizontal extends StatelessWidget {
       }
     });
 
+    //Detectar cuando se haga click o tap en un elemento
     return Container(
       height: _screenSize.height * 0.25,
       //.builder crea bajo demanda lo que se requiere
@@ -35,10 +36,11 @@ class MovieHorizontal extends StatelessWidget {
         //children: _tarjetas(context),
         //Como se va a construir cada PageView
         itemCount: peliculas.length,
-        itemBuilder: (context, i) => _tarjeta( context, peliculas[i] ),
+        itemBuilder: (context, i) => _tarjeta(context, peliculas[i]),
       ),
     );
   }
+
   //Crear una sola tarjeta
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
     return Container(
