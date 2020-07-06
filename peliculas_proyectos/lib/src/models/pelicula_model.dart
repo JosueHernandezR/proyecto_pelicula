@@ -69,4 +69,11 @@ class Pelicula {
     }
     return 'https://image.tmdb.org/t/p/w500/$posterPath';
   }
+
+  getBackgroundImg() {
+    if (posterPath == null) {
+      return 'https://seeba.se/wp-content/themes/consultix/images/no-image-found-360x260.png';
+    }
+    return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+  }
 }
