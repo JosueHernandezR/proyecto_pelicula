@@ -17,17 +17,35 @@ class MovieHorizontal extends StatelessWidget {
     final _screenSize = MediaQuery.of(context).size;
 
     //Escuchar todos los cambios en el pageViewController
+
     _pageController.addListener(() {
       if (_pageController.position.pixels >=
           _pageController.position.maxScrollExtent - 200) {
         //print('Cargar siguientes películas');
         siguientePagina();
       }
+      if (_pageController.position.pixels ==
+          _pageController.position.maxScrollExtent) {
+        _pageController.position.animateTo(
+          _pageController.position.maxScrollExtent - _screenSize.width * 0.35,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.elasticOut,
+        );
+        siguientePagina();
+      }
+      if (_pageController.position.pixels ==
+          _pageController.position.minScrollExtent) {
+        _pageController.position.animateTo(
+          _screenSize.width * 0.3,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.elasticOut,
+        );
+      }
     });
 
     //Detectar cuando se haga click o tap en un elemento
     return Container(
-      height: _screenSize.height * 0.25,
+      height: _screenSize.height * 0.26,
       //.builder crea bajo demanda lo que se requiere
       child: PageView.builder(
         pageSnapping: false,
@@ -43,18 +61,22 @@ class MovieHorizontal extends StatelessWidget {
 
   //Crear una sola tarjeta
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
+    pelicula.uniqueId = '${pelicula.id}-poster';
     //Se hace el cambio por que ya es dificil de leer por la identación
     final tarjeta = Container(
       margin: EdgeInsets.only(right: 15.0),
       child: Column(
         children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: FadeInImage(
-              image: NetworkImage(pelicula.getPosterImg()),
-              placeholder: AssetImage('assets/img/no-image.jpg'),
-              fit: BoxFit.cover,
-              height: 150.0,
+          Hero(
+            tag: pelicula.uniqueId,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: FadeInImage(
+                image: NetworkImage(pelicula.getPosterImg()),
+                placeholder: AssetImage('assets/img/no-image.jpg'),
+                fit: BoxFit.cover,
+                height: 150.0,
+              ),
             ),
           ),
           SizedBox(
