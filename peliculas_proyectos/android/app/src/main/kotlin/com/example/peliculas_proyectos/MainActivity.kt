@@ -1,4 +1,4 @@
-package com.example.peliculas_proyectos
+package com.proyectopelicula.JosueHernandezR
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
