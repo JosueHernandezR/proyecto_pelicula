@@ -10,10 +10,11 @@ class DataSearch extends SearchDelegate {
     // Son acciones de la AppBar
     return [
       IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () {
-            query = '';
-          })
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      )
     ];
   }
 
@@ -35,11 +36,12 @@ class DataSearch extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     // Crea los resultados que vamos a mostrar
     return Center(
-        child: Container(
-      height: 100.0,
-      width: 100.0,
-      color: Colors.blueAccent,
-    ));
+      child: Container(
+        height: 100.0,
+        width: 100.0,
+        color: Colors.blueAccent,
+      ),
+    );
   }
 
   @override
@@ -49,13 +51,14 @@ class DataSearch extends SearchDelegate {
       return Container();
     } else {
       return FutureBuilder(
-          future: peliculasProvider.buscarPelicula(query),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Pelicula>> snapshot) {
-            if (snapshot.hasData) {
-              final peliculas = snapshot.data;
-              return ListView(
-                children: peliculas.map((pelicula) {
+        future: peliculasProvider.buscarPelicula(query),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Pelicula>> snapshot) {
+          if (snapshot.hasData) {
+            final peliculas = snapshot.data;
+            return ListView(
+              children: peliculas.map(
+                (pelicula) {
                   return ListTile(
                     leading: FadeInImage(
                       placeholder: AssetImage('assets/img/no-image.jpg'),
@@ -72,14 +75,16 @@ class DataSearch extends SearchDelegate {
                           arguments: pelicula);
                     },
                   );
-                }).toList(),
-              );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          });
+                },
+              ).toList(),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      );
     }
   }
 }
